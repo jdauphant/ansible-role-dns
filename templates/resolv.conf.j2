@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+{% if dns_domain is defined %}
+domain {{dns_domain}}
+{% endif %}
+{% for nameserver in dns_nameservers %}
+nameserver {{nameserver}}
+{% endfor %}
