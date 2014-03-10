@@ -1,4 +1,9 @@
 ---
+- name: Remove resolvconf on Debian system
+  apt: pkg=resolvconf state=absent
+  when: ansible_os_family == 'Debian' and dns_remove_resolvconf
+  tags: ["packages","dns"]
+
 - name: Ensure dns servers are configured in /etc/resolv.conf
   template: src=resolv.conf.j2 dest=/etc/resolv.conf
   tags: ["configuration","dns"]
