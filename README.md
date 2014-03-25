@@ -13,5 +13,6 @@ Ansible host for configure DNS
 -  host: all
    role : dns
    dns_nameservers: ['8.8.8.8']  
+   dns_searchs: "localdomain otherdomain"
 
 ```
