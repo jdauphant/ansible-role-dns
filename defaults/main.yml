@@ -1,5 +1,5 @@
 ---
 dns_nameservers: ['8.8.8.8', '8.8.4.4']
 dns_remove_resolvconf: true
-dns_searchs: []
+#dns_searchs: ""
 dns_dhclient_rule: "supersede" # can be supersede or prepend
