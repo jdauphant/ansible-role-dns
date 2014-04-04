@@ -6,5 +6,5 @@ domain {{dns_domain}}
 nameserver {{nameserver}}
 {% endfor %}
 {% if dns_searchs is defined %}
-search {{dns_searchs}}
+search {% for name in dns_searchs %}{{name}} {% endfor %}
 {% endif %}

@@ -10,9 +10,13 @@
 
 - name: Ensure dns servers are configured in dhclient.conf
   lineinfile: >
-     regexp="(supersede|prepend) domain-name-servers"
-     line="{{dns_dhclient_rule}} domain-name-servers {% for nameserver in dns_nameservers %}{{nameserver}}{% if not loop.last %},{% endif %}{% endfor %};"  
-     dest=/etc/dhcp/dhclient.conf
+     regexp="#?(supersede|prepend) {{item.name}} "
+     line="{{dns_dhclient_rule}} {{item.name}} {{item.value}};"  
+     dest="{{dns_dhclient_file}}"
      state=present
-  when: ansible_distribution == "Ubuntu"
+  with_items:
+    - { name: 'domain-name-servers', value: '{% for nameserver in dns_nameservers %}{{nameserver}}{% if not loop.last %},{% endif %}{% endfor %}' }
+    - { name: 'domain-name', value: '\"{{dns_domain}}\"' }
+    - { name: 'domain-search', value: '{% for domainsearch in dns_searchs %}\"{{domainsearch}}\"{% if not loop.last %}, {% endif %}{% endfor %}' }
+  when:  dns_forced_in_dhclientconf and item.value != ""
   tags: [configuration,dns]
