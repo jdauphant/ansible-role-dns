@@ -7,4 +7,4 @@ dns_searchs:
 dns_dhclient_rule: "supersede" # can be supersede or prepend
 
 dns_dhclient_file: "/etc/dhcp/dhclient.conf"
-dns_forced_in_dhclientconf: "{{ansible_distribution == 'Ubuntu'}}"
+dns_forced_in_dhclientconf: "{{ansible_os_family == 'Debian' or ansible_os_family == 'Redhat'}}"
