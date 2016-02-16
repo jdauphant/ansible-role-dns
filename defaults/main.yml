@@ -2,8 +2,9 @@
 dns_nameservers: ['8.8.8.8', '8.8.4.4']
 dns_remove_resolvconf: true
 dns_domain: "localdomain"
-dns_searchs: 
-   - "{{dns_domain}}"
+dns_searchs:
+  - "{{dns_domain}}"
+dns_options: []
 dns_dhclient_rule: "supersede" # can be supersede or prepend
 
 dns_dhclient_file: "/etc/dhcp/dhclient.conf"
