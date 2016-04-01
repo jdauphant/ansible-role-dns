@@ -8,3 +8,6 @@ nameserver {{nameserver}}
 {% if dns_searchs is defined %}
 search {% for name in dns_searchs %}{{name}} {% endfor %}
 {% endif %}
+{% if dns_options is defined %}
+options {% for option in dns_options %}{{option}} {% endfor %}
+{% endif %}
