@@ -20,7 +20,7 @@
     create: "{{ dns_dhclient_create_file }}"
   with_items:
     - { name: 'domain-name-servers', value: '{% for nameserver in dns_nameservers %}{{nameserver}}{% if not loop.last %},{% endif %}{% endfor %}' }
-    - { name: 'domain-name', value: '\"{{dns_domain}}\"' }
-    - { name: 'domain-search', value: '{% for domainsearch in dns_searchs %}\"{{domainsearch}}\"{% if not loop.last %}, {% endif %}{% endfor %}' }
-  when:  dns_forced_in_dhclientconf and ((item.value != "" and dhclient_stat.stat.exists == True) or dns_dhclient_create_file)
+    - { name: 'domain-name', value: '"{{dns_domain}}"' }
+    - { name: 'domain-search', value: '{% for domainsearch in dns_searchs %}"{{domainsearch}}"{% if not loop.last %}, {% endif %}{% endfor %}' }
+  when: dns_forced_in_dhclientconf and item.value != "" and (dhclient_stat.stat.exists or dns_dhclient_create_file)
   tags: [configuration,dns]
