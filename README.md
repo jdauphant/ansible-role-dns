@@ -15,6 +15,6 @@ Ansible role for configure DNS
   roles:
   - role: ansible-role-dns
     dns_nameservers: ['8.8.8.8']  
-    dns_searchs: "localdomain otherdomain"
+    dns_searchs: ["localdomain", "otherdomain"]
 
 ```
