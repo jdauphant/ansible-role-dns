@@ -1,5 +1,5 @@
 # {{ ansible_managed }}
-{% if dns_domain is defined %}
+{% if dns_domain is defined and dns_domain %}
 domain {{dns_domain}}
 {% endif %}
 {% for nameserver in dns_nameservers %}

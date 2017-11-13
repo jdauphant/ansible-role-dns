@@ -8,6 +8,9 @@
   template: src=resolv.conf.j2 dest=/etc/resolv.conf
   tags: [configuration,dns]
 
+- stat: path="{{dns_dhclient_file}}"
+  register: dhclient_stat
+
 - name: Ensure dns servers are configured in dhclient.conf
   lineinfile: >
      regexp="#?(supersede|prepend) {{item.name}} "
@@ -18,5 +21,5 @@
     - { name: 'domain-name-servers', value: '{% for nameserver in dns_nameservers %}{{nameserver}}{% if not loop.last %},{% endif %}{% endfor %}' }
     - { name: 'domain-name', value: '\"{{dns_domain}}\"' }
     - { name: 'domain-search', value: '{% for domainsearch in dns_searchs %}\"{{domainsearch}}\"{% if not loop.last %}, {% endif %}{% endfor %}' }
-  when:  dns_forced_in_dhclientconf and item.value != ""
+  when:  dns_forced_in_dhclientconf and item.value != "" and dhclient_stat.stat.exists == True
   tags: [configuration,dns]
