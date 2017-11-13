@@ -10,3 +10,5 @@ install:
 script:
   - ansible-playbook -i ansible_hosts --syntax-check --list-tasks test.yml
   - ansible-playbook -i ansible_hosts --connection=local --sudo -vvvv test.yml --diff
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
