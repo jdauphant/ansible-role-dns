@@ -1,6 +1,8 @@
 ansible-role-dns
 ================
 
+## @jdauphant : I don't have time to manage anymore this role. Don't hesitate to fork and made your own version.
+
 Ansible role for configure DNS
 
 # Examples :
